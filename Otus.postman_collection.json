@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "79f8a78d-97da-425a-bb8f-bc603a95662b",
+		"name": "Otus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7823618"
+	},
+	"item": [
+		{
+			"name": "2nd homework",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
