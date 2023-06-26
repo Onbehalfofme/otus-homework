@@ -1,0 +1,7 @@
+global:
+  postgresql:
+    enabled: true
+    auth: 
+      username: myuser
+      password: passwd
+      database: myapp
