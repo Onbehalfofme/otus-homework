@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   pullPolicy: IfNotPresent
   repository: onbehalfofme/homework
-  tag: crud
+  tag: idempotency
 
 service:
   type: NodePort
@@ -23,7 +23,8 @@ ingress:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
   hosts:
-    - paths:
+    - host: arch.homework
+      paths:
         - path: /otusapp/danila(/|$)(.*)
           pathType: Prefix
           backend:

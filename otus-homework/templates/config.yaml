@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: hw3-config
+  name: hw7-config
 data:
   spring.datasource.url: {{ printf "jdbc:postgresql://%s:%s/%s"  .Values.externalPostgresql.postgresqlHost .Values.externalPostgresql.postgresqlPort .Values.externalPostgresql.postgresqlDatabase | quote}}
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: hw3-secret
+  name: hw7-secret
 type: Opaque
 data:
   spring.datasource.username: {{ printf "%s" .Values.externalPostgresql.postgresqlUsername | b64enc}}

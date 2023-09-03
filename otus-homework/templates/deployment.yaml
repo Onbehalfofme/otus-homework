@@ -37,9 +37,9 @@ spec:
               protocol: TCP
           envFrom:
             - configMapRef:
-                name: hw3-config
+                name: hw7-config
             - secretRef:
-                name: hw3-secret
+                name: hw7-secret
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
