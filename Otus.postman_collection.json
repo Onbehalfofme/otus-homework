@@ -7,36 +7,13 @@
 	},
 	"item": [
 		{
-			"name": "get user",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user/1",
-					"host": [
-						"arch",
-						"homework"
-					],
-					"path": [
-						"otusapp",
-						"danila",
-						"api",
-						"v1",
-						"user",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "create user",
+			"name": "First create",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 2,\n    \"username\": \"onbehalfofm\",\n    \"firstName\": \"Danil\",\n    \"lastName\": \"Kocha\",\n    \"email\": \"danilaakocha@gmail.com\",\n    \"phone\": \"79995897728\"\n}",
+					"raw": "{\n    \"id\": 2, \n    \"firstName\": \"Danila\",\n    \"lastName\": \"Kochan\",\n    \"email\": \"testEmail\",\n    \"phone\": \"89012345678\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -61,36 +38,13 @@
 			"response": []
 		},
 		{
-			"name": "get  second user",
+			"name": "First create again",
 			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user/2",
-					"host": [
-						"arch",
-						"homework"
-					],
-					"path": [
-						"otusapp",
-						"danila",
-						"api",
-						"v1",
-						"user",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "update user",
-			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"onbehalfofm\",\n    \"firstName\": \"Danila\",\n    \"lastName\": \"Kochan\",\n    \"email\": \"danilaakocha@gmail.com\",\n    \"phone\": \"79995897728\"\n}",
+					"raw": "{\n    \"id\": 1, \n    \"firstName\": \"Danila\",\n    \"lastName\": \"Kochan\",\n    \"email\": \"testEmail\",\n    \"phone\": \"89012345678\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -98,7 +52,7 @@
 					}
 				},
 				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user/2",
+					"raw": "arch.homework/otusapp/danila/api/v1/user",
 					"host": [
 						"arch",
 						"homework"
@@ -108,20 +62,28 @@
 						"danila",
 						"api",
 						"v1",
-						"user",
-						"2"
+						"user"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "get  second user updated",
+			"name": "Second create",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3, \n    \"firstName\": \"Danil\",\n    \"lastName\": \"Kocha\",\n    \"email\": \"testEmai\",\n    \"phone\": \"8901234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user/2",
+					"raw": "arch.homework/otusapp/danila/api/v1/user",
 					"host": [
 						"arch",
 						"homework"
@@ -131,20 +93,28 @@
 						"danila",
 						"api",
 						"v1",
-						"user",
-						"2"
+						"user"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "delete user",
+			"name": "Second create again",
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3, \n    \"firstName\": \"Danil\",\n    \"lastName\": \"Kocha\",\n    \"email\": \"testEmai\",\n    \"phone\": \"8901234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user/2",
+					"raw": "arch.homework/otusapp/danila/api/v1/user",
 					"host": [
 						"arch",
 						"homework"
@@ -154,31 +124,7 @@
 						"danila",
 						"api",
 						"v1",
-						"user",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get  second user deleted",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user/2",
-					"host": [
-						"arch",
-						"homework"
-					],
-					"path": [
-						"otusapp",
-						"danila",
-						"api",
-						"v1",
-						"user",
-						"2"
+						"user"
 					]
 				}
 			},
