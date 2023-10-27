@@ -1,14 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "otus-homework-3.fullname" . }}
+  name: order
   labels:
-    {{- include "otus-homework-3.labels" . | nindent 4 }}
+    app.kubernetes.io/name: order
+    app.kubernetes.io/instance: order
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "otus-homework-3.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/name: order
+      app.kubernetes.io/instance: order
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -16,7 +18,8 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "otus-homework-3.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/name: order
+        app.kubernetes.io/instance: order
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -25,15 +28,199 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: order
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "onbehalfofme/order:hw8"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: 8003
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: hw7-config
+            - secretRef:
+                name: hw7-secret
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage
+  labels:
+    app.kubernetes.io/name: storage
+    app.kubernetes.io/instance: storage
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: storage
+      app.kubernetes.io/instance: storage
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app.kubernetes.io/name: storage
+        app.kubernetes.io/instance: storage
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: storage
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "onbehalfofme/storage:hw8"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: hw7-config
+            - secretRef:
+                name: hw7-secret
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  labels:
+    app.kubernetes.io/name: payment
+    app.kubernetes.io/instance: payment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: payment
+      app.kubernetes.io/instance: payment
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app.kubernetes.io/name: payment
+        app.kubernetes.io/instance: payment
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: payment
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "onbehalfofme/payment:hw8"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: 8002
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: hw7-config
+            - secretRef:
+                name: hw7-secret
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delivery
+  labels:
+    app.kubernetes.io/name: delivery
+    app.kubernetes.io/instance: delivery
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: delivery
+      app.kubernetes.io/instance: delivery
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app.kubernetes.io/name: delivery
+        app.kubernetes.io/instance: delivery
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: delivery
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "onbehalfofme/delivery:hw8"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - name: http
+              containerPort: 8001
               protocol: TCP
           envFrom:
             - configMapRef:

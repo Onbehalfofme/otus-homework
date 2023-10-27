@@ -1,15 +1,75 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "otus-homework-3.fullname" . }}
+  name: order
   labels:
-    {{- include "otus-homework-3.labels" . | nindent 4 }}
+    app.kubernetes.io/name: order
+    app.kubernetes.io/instance: order
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+    - port: 8003
+      targetPort: 8003
       protocol: TCP
       name: http
   selector:
-    {{- include "otus-homework-3.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: order
+    app.kubernetes.io/instance: order
+ 
+ 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage
+  labels:
+    app.kubernetes.io/name: storage
+    app.kubernetes.io/instance: storage
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: storage
+    app.kubernetes.io/instance: storage
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+  labels:
+    app.kubernetes.io/name: payment
+    app.kubernetes.io/instance: payment
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8002
+      targetPort: 8002
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: payment
+    app.kubernetes.io/instance: payment
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: delivery
+  labels:
+    app.kubernetes.io/name: delivery
+    app.kubernetes.io/instance: delivery
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8001
+      targetPort: 8001
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: delivery
+    app.kubernetes.io/instance: delivery
+  

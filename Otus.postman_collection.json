@@ -7,13 +7,26 @@
 	},
 	"item": [
 		{
-			"name": "First create",
+			"name": "First order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 2, \n    \"firstName\": \"Danila\",\n    \"lastName\": \"Kochan\",\n    \"email\": \"testEmail\",\n    \"phone\": \"89012345678\"\n}",
+					"raw": "{\n    \"id\": \"0c12e41b-9e20-4e7f-8893-99cb9988008b\",\n    \"storage\": {\n        \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987b\"\n    },\n    \"payment\": {\n        \"id\": \"0c12e41b-9e20-4e7f-8893-99cb9988008a\",\n        \"cost\": 100,\n        \"orderId\": \"0c12e41b-9e20-4e7f-8893-99cb9988008b\"\n    },\n    \"delivery\": {\n        \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987e\",\n        \"courierId\": \"64245fb3-1113-404b-bbf6-23096bc0987e\",\n        \"deliverStart\": \"2023-10-30T12:36:20.737+00:00\",\n        \"deliverEnd\": \"2023-10-30T19:36:20.737+00:00\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,61 +34,80 @@
 					}
 				},
 				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user",
+					"raw": "arch.homework/order/api/v1/order",
 					"host": [
 						"arch",
 						"homework"
 					],
 					"path": [
-						"otusapp",
-						"danila",
+						"order",
 						"api",
 						"v1",
-						"user"
+						"order"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "First create again",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": 1, \n    \"firstName\": \"Danila\",\n    \"lastName\": \"Kochan\",\n    \"email\": \"testEmail\",\n    \"phone\": \"89012345678\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
+			"name": "Get payments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"One payment\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
 					}
-				},
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user",
+					"raw": "arch.homework/payment/api/v1/payment",
 					"host": [
 						"arch",
 						"homework"
 					],
 					"path": [
-						"otusapp",
-						"danila",
+						"payment",
 						"api",
 						"v1",
-						"user"
+						"payment"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Second create",
+			"name": "Second order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 3, \n    \"firstName\": \"Danil\",\n    \"lastName\": \"Kocha\",\n    \"email\": \"testEmai\",\n    \"phone\": \"8901234567\"\n}",
+					"raw": "{\n    \"id\": \"1c12e41b-9e20-4e7f-8893-99cb9988008b\",\n    \"storage\": {\n        \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987b\"\n    },\n    \"payment\": {\n        \"id\": \"1c12e41b-9e20-4e7f-8893-99cb9988008a\",\n        \"cost\": 100,\n        \"orderId\": \"1c12e41b-9e20-4e7f-8893-99cb9988008b\"\n    },\n    \"delivery\": {\n        \"id\": \"14245fb3-1113-404b-bbf6-23096bc0987e\",\n        \"courierId\": \"14245fb3-1113-404b-bbf6-23096bc0987e\",\n        \"deliverStart\": \"2023-10-30T12:36:20.737+00:00\",\n        \"deliverEnd\": \"2023-10-30T19:36:20.737+00:00\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -83,52 +115,85 @@
 					}
 				},
 				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user",
+					"raw": "arch.homework/order/api/v1/order",
 					"host": [
 						"arch",
 						"homework"
 					],
 					"path": [
-						"otusapp",
-						"danila",
+						"order",
 						"api",
 						"v1",
-						"user"
+						"order"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Second create again",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": 3, \n    \"firstName\": \"Danil\",\n    \"lastName\": \"Kocha\",\n    \"email\": \"testEmai\",\n    \"phone\": \"8901234567\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
+			"name": "Get payments again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"One payment\" , function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
 					}
-				},
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "arch.homework/otusapp/danila/api/v1/user",
+					"raw": "arch.homework/payment/api/v1/payment",
 					"host": [
 						"arch",
 						"homework"
 					],
 					"path": [
-						"otusapp",
-						"danila",
+						"payment",
 						"api",
 						"v1",
-						"user"
+						"payment"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bodyToken",
+			"value": "",
+			"type": "string"
 		}
 	]
 }

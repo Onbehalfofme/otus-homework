@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  pullPolicy: IfNotPresent
-  repository: onbehalfofme/homework
-  tag: idempotency
+  pullPolicy: Always
+  repository: onbehalfofme/order
+  tag: hw6
 
 service:
   type: NodePort
@@ -25,13 +25,20 @@ ingress:
   hosts:
     - host: arch.homework
       paths:
-        - path: /otusapp/danila(/|$)(.*)
+        - path: /order(/|$)(.*)
           pathType: Prefix
           backend:
             service:
-              name: otus-homework
+              name: order
               port:
-                number: 8000
+                number: 8003
+        - path: /payment(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: payment
+              port:
+                number: 8002
   tls: []
 
 resources:
