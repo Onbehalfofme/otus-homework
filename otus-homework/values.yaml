@@ -39,6 +39,13 @@ ingress:
               name: payment
               port:
                 number: 8002
+        - path: /notification(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: notification
+              port:
+                number: 8004
   tls: []
 
 resources:

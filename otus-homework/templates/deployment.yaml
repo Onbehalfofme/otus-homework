@@ -31,7 +31,7 @@ spec:
         - name: order
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "onbehalfofme/order:hw8"
+          image: "onbehalfofme/order:hw9"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           
           ports:
@@ -59,66 +59,66 @@ spec:
       {{- end }}
 
 
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: storage
-  labels:
-    app.kubernetes.io/name: storage
-    app.kubernetes.io/instance: storage
-spec:
-  replicas: {{ .Values.replicaCount }}
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: storage
-      app.kubernetes.io/instance: storage
-  template:
-    metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      labels:
-        app.kubernetes.io/name: storage
-        app.kubernetes.io/instance: storage
-    spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      containers:
-        - name: storage
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "onbehalfofme/storage:hw8"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{/*---*/}}
+{{/*apiVersion: apps/v1*/}}
+{{/*kind: Deployment*/}}
+{{/*metadata:*/}}
+{{/*  name: storage*/}}
+{{/*  labels:*/}}
+{{/*    app.kubernetes.io/name: storage*/}}
+{{/*    app.kubernetes.io/instance: storage*/}}
+{{/*spec:*/}}
+{{/*  replicas: {{ .Values.replicaCount }}*/}}
+{{/*  selector:*/}}
+{{/*    matchLabels:*/}}
+{{/*      app.kubernetes.io/name: storage*/}}
+{{/*      app.kubernetes.io/instance: storage*/}}
+{{/*  template:*/}}
+{{/*    metadata:*/}}
+{{/*      {{- with .Values.podAnnotations }}*/}}
+{{/*      annotations:*/}}
+{{/*        {{- toYaml . | nindent 8 }}*/}}
+{{/*      {{- end }}*/}}
+{{/*      labels:*/}}
+{{/*        app.kubernetes.io/name: storage*/}}
+{{/*        app.kubernetes.io/instance: storage*/}}
+{{/*    spec:*/}}
+{{/*      {{- with .Values.imagePullSecrets }}*/}}
+{{/*      imagePullSecrets:*/}}
+{{/*        {{- toYaml . | nindent 8 }}*/}}
+{{/*      {{- end }}*/}}
+{{/*      securityContext:*/}}
+{{/*        {{- toYaml .Values.podSecurityContext | nindent 8 }}*/}}
+{{/*      containers:*/}}
+{{/*        - name: storage*/}}
+{{/*          securityContext:*/}}
+{{/*            {{- toYaml .Values.securityContext | nindent 12 }}*/}}
+{{/*          image: "onbehalfofme/storage:hw9"*/}}
+{{/*          imagePullPolicy: {{ .Values.image.pullPolicy }}*/}}
 
-          ports:
-            - name: http
-              containerPort: 8000
-              protocol: TCP
-          envFrom:
-            - configMapRef:
-                name: hw7-config
-            - secretRef:
-                name: hw7-secret
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+{{/*          ports:*/}}
+{{/*            - name: http*/}}
+{{/*              containerPort: 8000*/}}
+{{/*              protocol: TCP*/}}
+{{/*          envFrom:*/}}
+{{/*            - configMapRef:*/}}
+{{/*                name: hw7-config*/}}
+{{/*            - secretRef:*/}}
+{{/*                name: hw7-secret*/}}
+{{/*          resources:*/}}
+{{/*            {{- toYaml .Values.resources | nindent 12 }}*/}}
+{{/*      {{- with .Values.nodeSelector }}*/}}
+{{/*      nodeSelector:*/}}
+{{/*        {{- toYaml . | nindent 8 }}*/}}
+{{/*      {{- end }}*/}}
+{{/*      {{- with .Values.affinity }}*/}}
+{{/*      affinity:*/}}
+{{/*        {{- toYaml . | nindent 8 }}*/}}
+{{/*      {{- end }}*/}}
+{{/*      {{- with .Values.tolerations }}*/}}
+{{/*      tolerations:*/}}
+{{/*        {{- toYaml . | nindent 8 }}*/}}
+{{/*      {{- end }}*/}}
       
 ---
 apiVersion: apps/v1
@@ -154,7 +154,7 @@ spec:
         - name: payment
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "onbehalfofme/payment:hw8"
+          image: "onbehalfofme/payment:hw9"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           ports:
@@ -185,16 +185,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: delivery
+  name: notification
   labels:
-    app.kubernetes.io/name: delivery
-    app.kubernetes.io/instance: delivery
+    app.kubernetes.io/name: notification
+    app.kubernetes.io/instance: notification
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: delivery
-      app.kubernetes.io/instance: delivery
+      app.kubernetes.io/name: notification
+      app.kubernetes.io/instance: notification
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -202,8 +202,8 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app.kubernetes.io/name: delivery
-        app.kubernetes.io/instance: delivery
+        app.kubernetes.io/name: notification
+        app.kubernetes.io/instance: notification
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -212,15 +212,15 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: delivery
+        - name: notification
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "onbehalfofme/delivery:hw8"
+          image: "onbehalfofme/notification:hw9"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           ports:
             - name: http
-              containerPort: 8001
+              containerPort: 8004
               protocol: TCP
           envFrom:
             - configMapRef:
