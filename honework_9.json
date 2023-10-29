@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "79f8a78d-97da-425a-bb8f-bc603a95662b",
+		"name": "Otus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7823618"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"id\":\"0c12e41b-9e20-4e7f-8893-99cb9988008f\",\n    \"name\":\"Danila\",\n    \"surname\":\"Kochan\",\n    \"balance\": 0\n    // \"id\": \"0c12e41b-9e20-4e7f-8893-99cb9988008b\",\n    // \"storage\": {\n    //     \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987b\"\n    // },\n    // \"payment\": {\n    //     \"id\": \"0c12e41b-9e20-4e7f-8893-99cb9988008a\",\n    //     \"cost\": 100,\n    //     \"orderId\": \"0c12e41b-9e20-4e7f-8893-99cb9988008b\"\n    // },\n    // \"delivery\": {\n    //     \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987e\",\n    //     \"courierId\": \"64245fb3-1113-404b-bbf6-23096bc0987e\",\n    //     \"deliverStart\": \"2023-10-30T12:36:20.737+00:00\",\n    //     \"deliverEnd\": \"2023-10-30T19:36:20.737+00:00\"\n    // }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "arch.homework/payment/api/v1/register",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"payment",
+						"api",
+						"v1",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add money",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userId\":\"0c12e41b-9e20-4e7f-8893-99cb9988008f\",\n\"amount\": 1000}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "arch.homework/payment/api/v1/addmoney",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"payment",
+						"api",
+						"v1",
+						"addmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "First order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1c12e41b-9e20-4e7f-8893-99cb9988008b\",\n    \"storage\": {\n        \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987b\"\n    },\n    \"payment\": {\n        \"userId\": \"0c12e41b-9e20-4e7f-8893-99cb9988008f\",\n        \"amount\": 100,\n        \"orderId\": \"1c12e41b-9e20-4e7f-8893-99cb9988008b\"\n    },\n    \"delivery\": {\n        \"id\": \"14245fb3-1113-404b-bbf6-23096bc0987e\",\n        \"courierId\": \"14245fb3-1113-404b-bbf6-23096bc0987e\",\n        \"deliverStart\": \"2023-10-30T12:36:20.737+00:00\",\n        \"deliverEnd\": \"2023-10-30T19:36:20.737+00:00\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "arch.homework/order/api/v1/order",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"order",
+						"api",
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get payments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"One payment\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "arch.homework/payment/api/v1/account",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"payment",
+						"api",
+						"v1",
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get notifications",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"One payment\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "arch.homework/notification/api/v1/notification",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"notification",
+						"api",
+						"v1",
+						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Second order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1c12e41b-9e20-4e7f-8893-99cb9988008b\",\n    \"storage\": {\n        \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987b\"\n    },\n    \"payment\": {\n        \"userId\": \"0c12e41b-9e20-4e7f-8893-99cb9988008f\",\n        \"amount\": 10000,\n        \"orderId\": \"1c12e41b-9e20-4e7f-8893-99cb9988008b\"\n    },\n    \"delivery\": {\n        \"id\": \"14245fb3-1113-404b-bbf6-23096bc0987e\",\n        \"courierId\": \"14245fb3-1113-404b-bbf6-23096bc0987e\",\n        \"deliverStart\": \"2023-10-30T12:36:20.737+00:00\",\n        \"deliverEnd\": \"2023-10-30T19:36:20.737+00:00\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "arch.homework/order/api/v1/order",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"order",
+						"api",
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get payments again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"One payment\" , function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "arch.homework/payment/api/v1/account",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"payment",
+						"api",
+						"v1",
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get notifications again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"One payment\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "arch.homework/notification/api/v1/notification",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"notification",
+						"api",
+						"v1",
+						"notification"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bodyToken",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
