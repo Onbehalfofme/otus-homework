@@ -46,6 +46,20 @@ ingress:
               name: notification
               port:
                 number: 8004
+        - path: /delivery(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: delivery
+              port:
+                number: 8001
+        - path: /storage(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: storage
+              port:
+                number: 8000
   tls: []
 
 resources:

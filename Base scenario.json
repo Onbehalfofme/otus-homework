@@ -26,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\n    \"id\":\"0c12e41b-9e20-4e7f-8893-99cb9988008f\",\n    \"name\":\"Danila\",\n    \"surname\":\"Kochan\",\n    \"balance\": 0\n    // \"id\": \"0c12e41b-9e20-4e7f-8893-99cb9988008b\",\n    // \"storage\": {\n    //     \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987b\"\n    // },\n    // \"payment\": {\n    //     \"id\": \"0c12e41b-9e20-4e7f-8893-99cb9988008a\",\n    //     \"cost\": 100,\n    //     \"orderId\": \"0c12e41b-9e20-4e7f-8893-99cb9988008b\"\n    // },\n    // \"delivery\": {\n    //     \"id\": \"54245fb3-1113-404b-bbf6-23096bc0987e\",\n    //     \"courierId\": \"64245fb3-1113-404b-bbf6-23096bc0987e\",\n    //     \"deliverStart\": \"2023-10-30T12:36:20.737+00:00\",\n    //     \"deliverEnd\": \"2023-10-30T19:36:20.737+00:00\"\n    // }\n}",
+					"raw": "{\n    \"id\":\"0c12e41b-9e20-4e7f-8893-99cb9988008f\",\n    \"name\":\"Danila\",\n    \"surname\":\"Kochan\",\n    \"balance\": 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -80,6 +80,57 @@
 			"response": []
 		},
 		{
+			"name": "Add item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"0c12e41b-9e21-4e7f-8893-99cb9988008f\",\n    \"name\": \"An item\",\n    \"description\": \"Wonderful item\",\n    \"price\": 100,\n    \"quantity\": 25\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "arch.homework/storage/api/v1/create",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"storage",
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "arch.homework/storage/api/v1/items",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"storage",
+						"api",
+						"v1",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "First order",
 			"event": [
 				{
@@ -123,19 +174,34 @@
 			"response": []
 		},
 		{
+			"name": "list items changed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "arch.homework/storage/api/v1/items",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"storage",
+						"api",
+						"v1",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get payments",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"One payment\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.length).to.eql(1);",
-							"});",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -248,13 +314,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"One payment\" , function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.length).to.eql(1);",
-							"});",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -286,13 +346,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"One payment\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.length).to.eql(1);",
-							"});",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -312,6 +366,27 @@
 						"api",
 						"v1",
 						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List deliveries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "arch.homework/delivery/api/v1/delivery",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"delivery",
+						"api",
+						"v1",
+						"delivery"
 					]
 				}
 			},

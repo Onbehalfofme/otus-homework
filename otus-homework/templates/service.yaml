@@ -52,4 +52,41 @@ spec:
   selector:
     app.kubernetes.io/name: notification
     app.kubernetes.io/instance: notification
-  
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: delivery
+  labels:
+    app.kubernetes.io/name: delivery
+    app.kubernetes.io/instance: delivery
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8001
+      targetPort: 8001
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: delivery
+    app.kubernetes.io/instance: delivery
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage
+  labels:
+    app.kubernetes.io/name: storage
+    app.kubernetes.io/instance: storage
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: storage
+    app.kubernetes.io/instance: storage
